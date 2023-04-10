@@ -1,6 +1,7 @@
 package com.dostavka.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,11 +13,11 @@ import java.util.List;
 public class Bucket {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bucket_seq")
-    @SequenceGenerator(name = "bucket_seq", sequenceName = "bucket_seq", allocationSize = 1)
+    @SequenceGenerator(name = "bucket_seq", sequenceName = "buckets_id_seq", allocationSize = 1)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    @OneToOne(optional = false, mappedBy = "bucket")
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)

@@ -1,5 +1,6 @@
 package com.dostavka.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,18 +24,20 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "login")
+    private String login;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "archive")
-    private boolean archive;
+    private int archive;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name = "address")
-    private String address;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    @OneToOne
+    @JoinColumn(name = "bucket_id")
     private Bucket bucket;
 }

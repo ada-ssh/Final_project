@@ -22,6 +22,10 @@ public class UserService{
         return userRepository.findById(id).get();
     }
 
+    public Optional<User> getUserByLogin(String login){
+        return userRepository.findUserByLogin(login);
+    }
+
     public ArrayList<User> getAllUsers() {
         return (ArrayList<User>) userRepository.findAll();
     }
@@ -37,6 +41,9 @@ public class UserService{
 
     public void deleteUser(User user) {
         userRepository.delete(user);
+    }
+
+    public String getRole(int id){ return userRepository.getRole(id);
     }
 
     @Transactional(rollbackFor = Exception.class)

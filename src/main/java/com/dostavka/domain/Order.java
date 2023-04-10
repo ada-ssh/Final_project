@@ -14,14 +14,11 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
-    @SequenceGenerator(name = "order_seq", sequenceName = "order_seq", allocationSize = 1)
+    @SequenceGenerator(name = "order_seq", sequenceName = "orders_id_seq", allocationSize = 1)
     private int id;
 
     @CreationTimestamp
     private LocalDateTime created;
-
-    @UpdateTimestamp
-    private LocalDateTime updated;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -31,8 +28,12 @@ public class Order {
 
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<OrderDetails> details;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "l_orders_products",
+            joinColumns = {@JoinColumn(name = "order_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    private List<Product> product;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
