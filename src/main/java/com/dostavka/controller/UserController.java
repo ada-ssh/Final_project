@@ -51,7 +51,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<HttpStatus> createUser(@RequestBody @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             for (ObjectError o : bindingResult.getAllErrors()) {

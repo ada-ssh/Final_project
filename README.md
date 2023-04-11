@@ -15,28 +15,7 @@ To register, you need to go to «localhost:8080/registration» and pass json (PO
 Authentication occurs when switching to «localhost:8080/auth» and pass json(POST method: {"login":..., "password"...}).
 
 ### Roles
-Client role
-
-Available endpoints:
-* "http://localhost:8080/products" - list of all products (GET method).
-* "http://localhost:8080/products/id/{id}" - specific product by id (GET method) .
-* "http://localhost:8080/products/title/{title}" - specific product by title(GET method).
-* "http://localhost:8080/buckets" - list of all buckets (GET method).
-* "http://localhost:8080/buckets/id/{id}" - specific bucket by id (GET method).
-* "http://localhost:8080/buckets" - adding a new bucket (POST method).
-* "http://localhost:8080/buckets" - update product by id (PUT method).
-* "http://localhost:8080/buckets" - delete product by id (DELETE method).
-* "http://localhost:8080/users" - list of all users (GET method).
-* "http://localhost:8080/users/id/{id}" - specific user by id (GET method).
-* "http://localhost:8080/users/name/{name}" - specific user by name (GET method).
-* "http://localhost:8080/users/create" - adding a new user (POST method).
-* "http://localhost:8080/orders" - list of all orders (GET method).
-* "http://localhost:8080/orders/id/{id}" - specific product by id (GET method).
-* "http://localhost:8080/orders" - adding a new order (POST method).
-* "http://localhost:8080/orders" - update product by id (PUT method).
-* "http://localhost:8080/orders" - delete product by id (DELETE method).
-
-Admin Role
+Admin and Client Role
 
 Available endpoints:
 * "http://localhost:8080/products" - list of all products (GET method).
