@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 
-@Controller
+@RestController
 @RequestMapping(value = "/orders", produces = MediaType.APPLICATION_JSON_VALUE)
 public class OrderController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -45,6 +45,7 @@ public class OrderController {
     @GetMapping("/sum")
     public ResponseEntity<Order> getOrderBySum(@PathVariable Double sum) {
         Order order = orderService.getOrderBySum(sum);
+        log.info("Just info");
         return new ResponseEntity<>(order, order.getSum() != 0 ? HttpStatus.OK : HttpStatus.CONFLICT);
     }
 

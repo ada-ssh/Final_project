@@ -40,6 +40,7 @@ public class SecurityService {
             User user = new User();
             user.setName(registrationUser.getName());
             user.setLogin(registrationUser.getLogin());
+            user.setEmail(registrationUser.getEmail());
             user.setRole(registrationUser.getRole());
             user.setPassword(passwordEncoder.encode(registrationUser.getPassword()));
 
