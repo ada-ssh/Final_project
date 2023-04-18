@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
 
 @Service
 public class SecurityService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
@@ -41,7 +39,6 @@ public class SecurityService {
             user.setName(registrationUser.getName());
             user.setLogin(registrationUser.getLogin());
             user.setEmail(registrationUser.getEmail());
-            user.setRole(registrationUser.getRole());
             user.setPassword(passwordEncoder.encode(registrationUser.getPassword()));
 
             User savedUser = userRepository.save(user);

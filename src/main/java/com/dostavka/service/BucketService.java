@@ -1,11 +1,9 @@
 package com.dostavka.service;
 
 import com.dostavka.domain.Bucket;
-import com.dostavka.domain.User;
 import com.dostavka.repository.BucketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
 @Service

@@ -1,21 +1,38 @@
 package com.dostavka.domain;
 
-import com.dostavka.annotation.IsArchive;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Builder;
 import lombok.Data;
-
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import java.security.cert.CertPathBuilder;
 
 @Data
 @Entity
 @Table(name = "users")
 public class User {
+    public User() {
+    }
+
+    public User(int id, String name, String password, String login, String email, int archive, Role role, Bucket bucket) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.login = login;
+        this.email = email;
+        this.archive = archive;
+        this.role = role;
+        this.bucket = bucket;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
@@ -37,7 +54,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @IsArchive
     @Column(name = "archive")
     private int archive;
 

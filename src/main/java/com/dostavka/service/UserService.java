@@ -4,8 +4,6 @@ import com.dostavka.domain.User;
 import com.dostavka.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -14,11 +12,11 @@ public class UserService{
     UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
 
-    public User getUserById(int id){
+    public User getUserById(int id) {
         return userRepository.findById(id).get();
     }
 
@@ -30,7 +28,10 @@ public class UserService{
         return (ArrayList<User>) userRepository.findAll();
     }
 
-    public User getUserByName(String name){return userRepository.findUserByName(name).get();}
+    public User getUserByName(String name){
+        return userRepository.findUserByName(name).get();
+    }
+
     public User createUser(User user) {
         return userRepository.save(user);
     }
@@ -43,11 +44,7 @@ public class UserService{
         userRepository.delete(user);
     }
 
-    public String getRole(int id){ return userRepository.getRole(id);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public void saveUserTransactional(User user) {
-        userRepository.save(user);
+    public String getRole(int id){
+        return userRepository.getRole(id);
     }
 }

@@ -1,12 +1,9 @@
 package com.dostavka.service;
 
 import com.dostavka.domain.Order;
-import com.dostavka.domain.Product;
-import com.dostavka.domain.User;
 import com.dostavka.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
 @Service
@@ -26,7 +23,9 @@ public class OrderService {
         return (ArrayList<Order>) orderRepository.findAll();
     }
 
-    public Order getOrderBySum(Double sum){return orderRepository.findOrderBySum(sum).get();}
+    public Order getOrderBySum(Double sum){
+        return orderRepository.findOrderBySum(sum).get();
+    }
 
     public Order createOrder(Order order) {
         return orderRepository.save(order);

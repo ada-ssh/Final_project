@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -20,8 +19,8 @@ import java.util.Optional;
 
 @Component
 public class JwtFilter extends GenericFilterBean{
-
     public String token;
+
     public String userLogin;
 
     private final JwtProvider jwtProvider;

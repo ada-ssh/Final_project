@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     private final JwtFilter jwtFilter;
 
     private static final String[] AUTH_WHITELIST = {
@@ -37,7 +36,6 @@ public class SecurityConfig {
         return (web) -> web.ignoring().antMatchers(AUTH_WHITELIST);
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -53,7 +51,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {

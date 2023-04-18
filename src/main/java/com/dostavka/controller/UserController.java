@@ -1,6 +1,5 @@
 package com.dostavka.controller;
 
-
 import com.dostavka.domain.User;
 import com.dostavka.service.UserService;
 import org.slf4j.Logger;
@@ -9,11 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.ArrayList;
 
@@ -30,7 +34,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<ArrayList<User>> getAllUsers() {
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getAllUsers() != null ? HttpStatus.OK : HttpStatus.CONFLICT);
     }
 
     @GetMapping("/id/{id}")
@@ -43,12 +47,6 @@ public class UserController {
     public  ResponseEntity<User> getUserByName(@PathVariable String name){
         User user = userService.getUserByName(name);
         return new ResponseEntity<>(user, user.getName() != null ? HttpStatus.OK : HttpStatus.CONFLICT);
-    }
-
-    @PostMapping("/test")
-    public ResponseEntity<HttpStatus> saveUserTransactional(@RequestBody User user){
-        userService.saveUserTransactional(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping()
@@ -79,6 +77,4 @@ public class UserController {
         userService.deleteUser(user);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }

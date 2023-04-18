@@ -1,21 +1,23 @@
 package com.dostavka.controller;
 
 import com.dostavka.domain.Order;
-import com.dostavka.domain.Product;
 import com.dostavka.service.OrderService;
-import com.dostavka.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.ArrayList;
 
@@ -23,7 +25,6 @@ import java.util.ArrayList;
 @RequestMapping(value = "/orders", produces = MediaType.APPLICATION_JSON_VALUE)
 public class OrderController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-
     private final OrderService orderService;
 
     @Autowired
@@ -33,7 +34,7 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<ArrayList<Order>> getAllOrders() {
-        return new ResponseEntity<>(orderService.getAllOrders(), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getAllOrders() != null ? HttpStatus.OK : HttpStatus.CONFLICT);
     }
 
     @GetMapping("/id/{id}")
@@ -42,7 +43,7 @@ public class OrderController {
         return new ResponseEntity<>(order, order.getId() != 0 ? HttpStatus.OK : HttpStatus.CONFLICT);
     }
 
-    @GetMapping("/sum")
+    @GetMapping("/sum/{sum}")
     public ResponseEntity<Order> getOrderBySum(@PathVariable Double sum) {
         Order order = orderService.getOrderBySum(sum);
         log.info("Just info");
@@ -77,5 +78,4 @@ public class OrderController {
         orderService.deleteOrder(order);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

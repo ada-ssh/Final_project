@@ -1,7 +1,6 @@
 package com.dostavka.controller;
 
 import com.dostavka.domain.Bucket;
-import com.dostavka.domain.User;
 import com.dostavka.service.BucketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -29,8 +34,8 @@ public class BucketController {
     }
 
     @GetMapping
-    public ResponseEntity<ArrayList<Bucket>> getAllUsers() {
-        return new ResponseEntity<>(bucketService.getAllBuckets(), HttpStatus.OK);
+    public ResponseEntity<ArrayList<Bucket>> getAllBuckets() {
+        return new ResponseEntity<>(bucketService.getAllBuckets() != null ? HttpStatus.OK : HttpStatus.CONFLICT);
     }
 
     @GetMapping("/id/{id}")
@@ -40,7 +45,7 @@ public class BucketController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createUser(@RequestBody @Valid Bucket bucket, BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> createBucket(@RequestBody @Valid Bucket bucket, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             for (ObjectError o : bindingResult.getAllErrors()) {
                 log.warn(o.getDefaultMessage());

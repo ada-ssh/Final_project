@@ -1,6 +1,5 @@
 package com.dostavka.domain.request;
 
-import com.dostavka.domain.Role;
 import lombok.Data;
 
 @Data
@@ -8,7 +7,6 @@ public class RegistrationUser {
     private String name;
     private String login;
     private String password;
-    private Role role;
     private String email;
 
     public String getEmail() {
@@ -43,11 +41,5 @@ public class RegistrationUser {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }
