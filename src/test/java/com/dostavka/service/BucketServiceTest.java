@@ -26,7 +26,7 @@ class BucketServiceTest {
     private List<Bucket> buckets;
 
     @BeforeEach
-    void setUser() {
+    void setBucket() {
         MockitoAnnotations.openMocks(this);
         bucketService = new BucketService(bucketRepository);
         bucket = new Bucket(1, new User(), new ArrayList<>());

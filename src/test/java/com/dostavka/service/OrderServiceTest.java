@@ -48,7 +48,7 @@ class OrderServiceTest {
     }
 
     @Test
-    void createFeedback() {
+    void createOrder() {
         Order newOrder = new Order(1, LocalDateTime.now(), new User(), 12.37, "Surganova, 33", new ArrayList<>(), OrderStatus.NEW);
         orderService.createOrder(newOrder);
         verify(orderRepository, times(2)).save(ArgumentMatchers.any(Order.class));
